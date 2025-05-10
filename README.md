@@ -1,5 +1,18 @@
 A powershell script to emulate an enigma machine.
-Usable interactively or from the command line.
+
+Setup:
+Place all the files into a folder together.
+Right click the EngimaPS.ps1 file and select "properties". You'll need to select "unblock" at the bottom.
+You can now run the script!
+
+I've also included "AddToProfile.ps1" which will add an alias to your powershell profile for ease of use from the command line, this is optional but recommended.
+Using from the command line let you use all the features, right clicking and selecting "run with powershell" is much more limited
+
+Editing:
+You can freely edit Plugboard.txt, so long as you follow the format and make sure it is reversible (so if A=Z then you must also include Z=A). Temporary plugboard setups can be done from the command line, the txt file is for the default
+Rotors generally shouldn't be edited as they're a bit more fiddly, but feel free to copy and rename them, they open in notepad. Rotor 0 is for debugging.
+
+Help Text:
 
 The simplest way to use this is to just run the script and enter the text you want to process. Will only process letters; characters and numbers are ommitted (but see CleanUp option)
 
