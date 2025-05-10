@@ -81,6 +81,7 @@ if($InputText){
     }
 } else {
     $Cleartext = Read-Host "Cleartext"
+    $PauseWhenDone = $True
 }
 $StartTime = Get-date
 if($Pad){
@@ -413,4 +414,8 @@ if($OutputFile){
     catch {
         Write-Host "Error writing to file $OutputFile! $($PSItem.Exception.Message)"
     }
+}
+
+if($PauseWhenDone -eq $True){
+    Read-Host
 }
