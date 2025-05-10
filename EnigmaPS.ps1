@@ -128,7 +128,7 @@ if($OutputBlocks -and $Pad){
 }
 $Length = $ProcessText.Length
 if(!$Quiet){
-    write-host "`nCleartext: "($ProcessText -join "")"`n"
+    write-host "`nInput: "($ProcessText -join "")"`n"
 }
 
 ### Rotor selection ###
@@ -322,7 +322,7 @@ $RotorBOdo = 0
 $RotorCOdo = 0
 $CipherLength = 1
 if(!$Quiet){Write-Host "Encrypting/Decrypting input"}
-if($ShowTable){write-host "`nI-Input P-Plugboard A-Fast rotor B-Middle rotor C-Slow rotor O-Out"; write-host "`nIN  I->P   P->A   A->B   B->C   R->R   C->B   B->A   A->P   P->O  OUT"; write-host "----------------------------------------------------------------------"}
+if($ShowTable){write-host "`nI-Input P-Plugboard A-Fast rotor B-Middle rotor C-Slow rotor R-Reflector O-Out"; write-host "`nIN   P      A      B      C      R      C      B      A      P    OUT"; write-host "----------------------------------------------------------------------"}
 $CipherText = ""
 $ProcessText | ForEach-Object {
     $ProcessCharacter = $_
@@ -357,7 +357,6 @@ $ProcessText | ForEach-Object {
     if($OutputBlocks){
         if(($CipherLength % $OutputBlocks) -eq 1){
             $CipherText = $CipherText + " "
-            if($ShowTable){write-host ""}
         }
     }
     #Step Rotor A - every time
@@ -390,12 +389,17 @@ $ProcessText | ForEach-Object {
     }
     elseif($ShowTable){
         write-host $DebugText
+        if($OutputBlocks){
+            if(($CipherLength % $OutputBlocks) -eq 1){
+                write-host ""
+            }
+        }
     }
 }
 $EndTime = Get-Date
 $Time = [math]::Round(($EndTime - $StartTime).TotalSeconds,2)
 if(!$Quiet){
-    Write-Host "`nCiphertext:"
+    Write-Host "`nOutput:"
     Write-output $CipherText
     Write-Host ""
     Write-Host "Processed $Length chracters in $Time seconds"
